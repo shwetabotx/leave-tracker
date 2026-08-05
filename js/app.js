@@ -1,13 +1,16 @@
 console.log("Employee Leave Tracker Loaded");
 
+
+let leaveRequests = [];
+
 const leaveForm = document.getElementById("leaveForm");
 
 leaveForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     if (validateForm()) {
-        console.log("Form is valid!");
-       
+        addLeaveRequest();
+
     }
 });
 
@@ -158,6 +161,40 @@ function validateForm() {
     }
 
     return isValid;
+}
+
+// Function to add leave request to the array
+function addLeaveRequest() {
+    const employeeName = document.getElementById("employeeName").value.trim();
+    const employeeId = document.getElementById("employeeId").value.trim();
+    const leaveType = document.getElementById("leaveType").value;
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
+    const reason = document.getElementById("reason").value.trim();
+    const status = document.getElementById("status").value;
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    const totalLeaveDays =
+        Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+        const leaveRequest = {
+    employeeName,
+    employeeId,
+    leaveType,
+    startDate,
+    endDate,
+    totalLeaveDays,
+    reason,
+    status,
+    createdDate: new Date().toLocaleDateString()
+};
+leaveRequests.push(leaveRequest);
+console.log(leaveRequests);
+
+leaveForm.reset();
+document.getElementById("status").value = "Pending";
 }
 
 function clearErrors() {
