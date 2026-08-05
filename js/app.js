@@ -179,23 +179,60 @@ function addLeaveRequest() {
     const totalLeaveDays =
         Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
 
-        const leaveRequest = {
-    employeeName,
-    employeeId,
-    leaveType,
-    startDate,
-    endDate,
-    totalLeaveDays,
-    reason,
-    status,
-    createdDate: new Date().toLocaleDateString()
-};
-leaveRequests.push(leaveRequest);
-console.log(leaveRequests);
+    const leaveRequest = {
+        employeeName,
+        employeeId,
+        leaveType,
+        startDate,
+        endDate,
+        totalLeaveDays,
+        reason,
+        status,
+        createdDate: new Date().toLocaleDateString()
+    };
+    leaveRequests.push(leaveRequest);
+    console.log(leaveRequests);
 
-leaveForm.reset();
-document.getElementById("status").value = "Pending";
+    renderLeaveRequests();
+
+    leaveForm.reset();
+    document.getElementById("status").value = "Pending";
 }
+
+function renderLeaveRequests() {
+     console.log("renderLeaveRequests called");
+
+    const tableBody = document.getElementById("leaveTableBody");
+
+    tableBody.innerHTML = "";
+
+    leaveRequests.forEach((leave) => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${leave.employeeName}</td>
+            <td>${leave.employeeId}</td>
+            <td>${leave.leaveType}</td>
+            <td>${leave.startDate}</td>
+            <td>${leave.endDate}</td>
+            <td>${leave.totalLeaveDays}</td>
+            <td>${leave.status}</td>
+            <td>${leave.createdDate}</td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+
+}
+
+
+
+
+
+
+
+
 
 function clearErrors() {
 
