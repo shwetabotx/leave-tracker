@@ -2,6 +2,7 @@ console.log("Employee Leave Tracker Loaded");
 
 
 let leaveRequests = [];
+let editIndex = -1;
 
 const leaveForm = document.getElementById("leaveForm");
 
@@ -9,9 +10,13 @@ leaveForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     if (validateForm()) {
+    if (editIndex === -1) {
         addLeaveRequest();
-
+    } else {
+        updateLeaveRequest();
     }
+}
+    
 });
 
 function validateForm() {
@@ -201,13 +206,13 @@ function addLeaveRequest() {
 }
 
 function renderLeaveRequests() {
-     console.log("renderLeaveRequests called");
+    console.log("renderLeaveRequests called");
 
     const tableBody = document.getElementById("leaveTableBody");
 
     tableBody.innerHTML = "";
 
-    leaveRequests.forEach((leave) => {
+    leaveRequests.forEach((leave, index) => {
 
         const row = document.createElement("tr");
 
@@ -220,7 +225,15 @@ function renderLeaveRequests() {
             <td>${leave.totalLeaveDays}</td>
             <td>${leave.status}</td>
             <td>${leave.createdDate}</td>
+            <td>
+            <button
+                class="btn btn-warning btn-sm"
+                onclick="editLeaveRequest(${index})">
+                Edit
+            </button>
+            </td>
         `;
+
 
         tableBody.appendChild(row);
     });
@@ -246,9 +259,48 @@ function loadFromLocalStorage() {
 
 }
 
+function editLeaveRequest(index) {
+    editIndex = index;
+    const leave = leaveRequests[index];
+    document.getElementById("employeeName").value = leave.employeeName;
+    document.getElementById("employeeId").value = leave.employeeId;
+    document.getElementById("employeeName").disabled = true;
+    document.getElementById("employeeId").disabled = true;
+    document.getElementById("leaveType").value = leave.leaveType;
+    document.getElementById("startDate").value = leave.startDate;
+    document.getElementById("endDate").value = leave.endDate;
+    document.getElementById("reason").value = leave.reason;
+    document.getElementById("status").value = leave.status;
+    console.log(index);
+}
+function updateLeaveRequest() {
+    const leave = leaveRequests[editIndex];
+    leave.employeeName = document.getElementById("employeeName").value.trim();
+    leave.employeeId = document.getElementById("employeeId").value.trim();
+    leave.leaveType = document.getElementById("leaveType").value;
+    leave.startDate = document.getElementById("startDate").value;
+    leave.endDate = document.getElementById("endDate").value;
+    leave.reason = document.getElementById("reason").value.trim();
+    leave.status = document.getElementById("status").value;
+
+    const start = new Date(leave.startDate);
+    const end = new Date(leave.endDate);
+
+    leave.totalLeaveDays =
+        Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+    saveToLocalStorage();
+    renderLeaveRequests();
+
+    leaveForm.reset();
+    document.getElementById("status").value = "Pending";
+    editIndex = -1;
+
+}
+
+
 loadFromLocalStorage();
 renderLeaveRequests();
-
 
 
 function clearErrors() {
