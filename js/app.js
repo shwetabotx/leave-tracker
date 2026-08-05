@@ -191,6 +191,7 @@ function addLeaveRequest() {
         createdDate: new Date().toLocaleDateString()
     };
     leaveRequests.push(leaveRequest);
+    saveToLocalStorage();
     console.log(leaveRequests);
 
     renderLeaveRequests();
@@ -226,11 +227,27 @@ function renderLeaveRequests() {
 
 }
 
+function saveToLocalStorage() {
+
+    localStorage.setItem(
+        "leaveRequests",
+        JSON.stringify(leaveRequests)
+    );
+
+}
 
 
+function loadFromLocalStorage() {
 
+    const storedData = localStorage.getItem("leaveRequests");
+    if (storedData) {
+        leaveRequests = JSON.parse(storedData);
+    }
 
+}
 
+loadFromLocalStorage();
+renderLeaveRequests();
 
 
 
