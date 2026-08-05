@@ -10,13 +10,13 @@ leaveForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     if (validateForm()) {
-    if (editIndex === -1) {
-        addLeaveRequest();
-    } else {
-        updateLeaveRequest();
+        if (editIndex === -1) {
+            addLeaveRequest();
+        } else {
+            updateLeaveRequest();
+        }
     }
-}
-    
+
 });
 
 function validateForm() {
@@ -226,11 +226,18 @@ function renderLeaveRequests() {
             <td>${leave.status}</td>
             <td>${leave.createdDate}</td>
             <td>
+            <center>
             <button
                 class="btn btn-warning btn-sm"
                 onclick="editLeaveRequest(${index})">
                 Edit
             </button>
+            <button
+                class="btn btn-danger btn-sm"
+                onclick="deleteLeaveRequest(${index})">
+                Delete
+            </button>
+            </center>
             </td>
         `;
 
@@ -298,6 +305,22 @@ function updateLeaveRequest() {
 
 }
 
+function deleteLeaveRequest(index) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this leave request?"
+    );
+
+    if (confirmDelete) {
+        leaveRequests.splice(index, 1);
+
+        saveToLocalStorage();
+
+        renderLeaveRequests();
+
+    }
+
+}
 
 loadFromLocalStorage();
 renderLeaveRequests();
