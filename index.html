@@ -40,14 +40,17 @@
                             </label>
 
                             <input type="text" class="form-control" id="employeeName">
+                            <small id="employeeNameError" class="text-danger"></small>
                         </div>
-
+                        
                         <div class="col-md-6">
                             <label class="form-label">
                                 Employee ID
                             </label>
 
                             <input type="text" class="form-control" id="employeeId">
+
+                            <small id="employeeIdError" class="text-danger"></small>
                         </div>
 
                         <div class="col-md-6">
@@ -56,6 +59,7 @@
                             </label>
 
                             <select class="form-select" id="leaveType">
+                                <small id="leaveTypeError" class="text-danger"></small>
 
                                 <option value="">
                                     Select Leave Type
@@ -75,6 +79,7 @@
                             </label>
 
                             <input type="date" class="form-control" id="startDate">
+                            <small id="startDateError" class="text-danger"></small>
                         </div>
 
                         <div class="col-md-3">
@@ -83,6 +88,7 @@
                             </label>
 
                             <input type="date" class="form-control" id="endDate">
+                            <small id="endDateError" class="text-danger"></small>
                         </div>
 
                         <div class="col-12">
@@ -91,6 +97,7 @@
                             </label>
 
                             <textarea rows="3" class="form-control" id="reason"></textarea>
+                            <small id="reasonError" class="text-danger"></small>
                         </div>
 
                         <div class="col-md-4">
@@ -99,6 +106,7 @@
                             </label>
 
                             <select class="form-select" id="status">
+                                <small id="statusError" class="text-danger"></small>
 
                                 <option selected>
                                     Pending
