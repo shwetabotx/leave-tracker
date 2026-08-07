@@ -2,14 +2,19 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Employee Leave Tracker</title>
 
-    <!-- Bootstrap CSS Min Version-->
+    <!-- Bootstrap CSS Min Version -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -19,8 +24,7 @@
         <h1 class="text-center mb-4">
             Employee Leave Tracker
         </h1>
-
-        <!-- form-->
+        <!-- Leave Request Form -->
 
         <div class="card mb-4">
 
@@ -35,91 +39,131 @@
                     <div class="row g-3">
 
                         <div class="col-md-6">
+
                             <label class="form-label">
                                 Employee Name
                             </label>
 
                             <input type="text" class="form-control" id="employeeName">
-                            <small id="employeeNameError" class="text-danger"></small>
+
+                            <small id="employeeNameError" class="text-danger">
+                            </small>
+
                         </div>
+
                         <div class="col-md-6">
+
                             <label class="form-label">
                                 Employee ID
                             </label>
 
                             <input type="text" class="form-control" id="employeeId">
 
-                            <small id="employeeIdError" class="text-danger"></small>
+                            <small id="employeeIdError" class="text-danger">
+                            </small>
+
                         </div>
 
                         <div class="col-md-6">
+
                             <label class="form-label">
                                 Leave Type
                             </label>
 
                             <select class="form-select" id="leaveType">
-                                <small id="leaveTypeError" class="text-danger"></small>
 
                                 <option value="">
                                     Select Leave Type
                                 </option>
 
-                                <option>Casual Leave</option>
-                                <option>Sick Leave</option>
-                                <option>Earned Leave</option>
-                                <option>Work From Home</option>
+                                <option value="Casual Leave">
+                                    Casual Leave
+                                </option>
+
+                                <option value="Sick Leave">
+                                    Sick Leave
+                                </option>
+
+                                <option value="Earned Leave">
+                                    Earned Leave
+                                </option>
+
+                                <option value="Work From Home">
+                                    Work From Home
+                                </option>
 
                             </select>
+
+                            <small id="leaveTypeError" class="text-danger">
+                            </small>
+
                         </div>
 
                         <div class="col-md-3">
+
                             <label class="form-label">
                                 Start Date
                             </label>
 
                             <input type="date" class="form-control" id="startDate">
-                            <small id="startDateError" class="text-danger"></small>
+
+                            <small id="startDateError" class="text-danger">
+                            </small>
+
                         </div>
 
                         <div class="col-md-3">
+
                             <label class="form-label">
                                 End Date
                             </label>
 
                             <input type="date" class="form-control" id="endDate">
-                            <small id="endDateError" class="text-danger"></small>
+
+                            <small id="endDateError" class="text-danger">
+                            </small>
+
                         </div>
 
                         <div class="col-12">
+
                             <label class="form-label">
                                 Reason
                             </label>
 
-                            <textarea rows="3" class="form-control" id="reason"></textarea>
-                            <small id="reasonError" class="text-danger"></small>
+                            <textarea rows="3" class="form-control" id="reason">
+                            </textarea>
+
+                            <small id="reasonError" class="text-danger">
+                            </small>
+
                         </div>
 
                         <div class="col-md-4">
+
                             <label class="form-label">
                                 Status
                             </label>
 
                             <select class="form-select" id="status">
-                                <small id="statusError" class="text-danger"></small>
 
-                                <option selected>
+                                <option value="Pending" selected>
                                     Pending
                                 </option>
 
-                                <option>
+                                <option value="Approved">
                                     Approved
                                 </option>
 
-                                <option>
+                                <option value="Rejected">
                                     Rejected
                                 </option>
 
                             </select>
+
+                            <small id="statusError" class="text-danger">
+                            </small>
+
                         </div>
 
                     </div>
@@ -136,7 +180,7 @@
 
         </div>
 
-        <!--Search & Filter Section-->
+        <!-- Search & Filter Section -->
 
         <div class="card mb-4">
 
@@ -156,10 +200,22 @@
 
                     <div class="col-md-3">
 
-                        <select class="form-select">
+                        <select class="form-select" id="statusFilter">
 
-                            <option>
+                            <option value="all">
                                 All Status
+                            </option>
+
+                            <option value="Pending">
+                                Pending
+                            </option>
+
+                            <option value="Approved">
+                                Approved
+                            </option>
+
+                            <option value="Rejected">
+                                Rejected
                             </option>
 
                         </select>
@@ -168,10 +224,26 @@
 
                     <div class="col-md-3">
 
-                        <select class="form-select">
+                        <select class="form-select" id="leaveTypeFilter">
 
-                            <option>
+                            <option value="all">
                                 All Leave Types
+                            </option>
+
+                            <option value="Casual Leave">
+                                Casual Leave
+                            </option>
+
+                            <option value="Sick Leave">
+                                Sick Leave
+                            </option>
+
+                            <option value="Earned Leave">
+                                Earned Leave
+                            </option>
+
+                            <option value="Work From Home">
+                                Work From Home
                             </option>
 
                         </select>
@@ -196,10 +268,6 @@
 
         </div>
 
-
-
-        <!--Table of leave requests -->
-
         <div class="card">
 
             <div class="card-header">
@@ -215,18 +283,27 @@
                         <tr>
 
                             <th>Name</th>
+
                             <th>ID</th>
+
                             <th>Leave Type</th>
+
                             <th>Start</th>
+
                             <th>End</th>
+
                             <th>Days</th>
+
                             <th>Status</th>
+
                             <th>Created</th>
+
                             <th>Actions</th>
 
                         </tr>
 
                     </thead>
+
 
                     <tbody id="leaveTableBody">
 
