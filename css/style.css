@@ -1,4 +1,3 @@
-
 body {
     background-color: #f5f6f8;
 }
@@ -29,6 +28,44 @@ body {
         font-size: 14px;
     }
 
+}
+
+/* Dark Mode */
+
+body.dark-mode {
+    background-color: #212529;
+    color: #f8f9fa;
+}
+
+.dark-mode .card {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.dark-mode .card-header {
+    background-color: #495057;
+    color: #ffffff;
+}
+
+.dark-mode .form-control,
+.dark-mode .form-select,
+.dark-mode textarea {
+    background-color: #495057;
+    color: #ffffff;
+    border-color: #6c757d;
+}
+
+.dark-mode .form-control::placeholder {
+    color: #ced4da;
+}
+
+.dark-mode .table {
+    color: #ffffff;
+}
+
+.dark-mode .table th,
+.dark-mode .table td {
+    border-color: #6c757d;
 }
 
 @media (max-width: 576px) {

@@ -1,5 +1,24 @@
 console.log("Employee Leave Tracker Loaded");
 
+//theme
+
+const themeToggle = document.getElementById("themeToggle");
+themeToggle.addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        themeToggle.textContent = "☀️";
+        themeToggle.classList.remove("btn-dark");
+        themeToggle.classList.add("btn-light");
+
+    } else {
+        themeToggle.textContent = "🌙";
+        themeToggle.classList.remove("btn-light");
+        themeToggle.classList.add("btn-dark");
+    }
+});
+
+
 let leaveRequests = [];
 let editIndex = -1;
 
