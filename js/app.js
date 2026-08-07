@@ -1,5 +1,24 @@
 console.log("Employee Leave Tracker Loaded");
 
+//search functionality
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", function () {
+
+    const searchText = searchInput.value.trim().toLowerCase();
+
+    const filteredRequests = leaveRequests.filter((leave) => {
+
+        return (
+            leave.employeeName.toLowerCase().includes(searchText) ||
+            leave.employeeId.toLowerCase().includes(searchText)
+        );
+
+    });
+
+    renderLeaveRequests(filteredRequests);
+
+});
+
 
 let leaveRequests = [];
 let editIndex = -1;
@@ -205,14 +224,14 @@ function addLeaveRequest() {
     document.getElementById("status").value = "Pending";
 }
 
-function renderLeaveRequests() {
+function renderLeaveRequests(requests = leaveRequests) {
     console.log("renderLeaveRequests called");
 
     const tableBody = document.getElementById("leaveTableBody");
 
     tableBody.innerHTML = "";
 
-    leaveRequests.forEach((leave, index) => {
+    requests.forEach((leave, index) => {
 
         const row = document.createElement("tr");
 
@@ -334,5 +353,4 @@ function clearErrors() {
     document.getElementById("startDateError").textContent = "";
     document.getElementById("endDateError").textContent = "";
     document.getElementById("reasonError").textContent = "";
-
 }
