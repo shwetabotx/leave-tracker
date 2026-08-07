@@ -79,34 +79,34 @@ function applyFilters() {
 
     //sorting
 
-if (sortFilter.value === "name") {
+    if (sortFilter.value === "name") {
 
-    filteredRequests.sort((a, b) =>
-        a.employeeName.localeCompare(b.employeeName)
-    );
-}
+        filteredRequests.sort((a, b) =>
+            a.employeeName.localeCompare(b.employeeName)
+        );
+    }
 
-else if (sortFilter.value === "startDate") {
+    else if (sortFilter.value === "startDate") {
 
-    filteredRequests.sort((a, b) =>
-        new Date(a.startDate) - new Date(b.startDate)
-    );
+        filteredRequests.sort((a, b) =>
+            new Date(a.startDate) - new Date(b.startDate)
+        );
 
-}
+    }
 
-else if (sortFilter.value === "endDate") {
+    else if (sortFilter.value === "endDate") {
 
-    filteredRequests.sort((a, b) =>
-        new Date(a.endDate) - new Date(b.endDate)
-    );
-}
+        filteredRequests.sort((a, b) =>
+            new Date(a.endDate) - new Date(b.endDate)
+        );
+    }
 
-else if (sortFilter.value === "createdDate") {
+    else if (sortFilter.value === "createdDate") {
 
-    filteredRequests.sort((a, b) =>
-        new Date(a.createdDate) - new Date(b.createdDate)
-    );
-}
+        filteredRequests.sort((a, b) =>
+            new Date(a.createdDate) - new Date(b.createdDate)
+        );
+    }
     renderLeaveRequests(filteredRequests);
 }
 
@@ -250,7 +250,7 @@ function validateForm() {
 
     }
     // Date Range Validation
-    
+
     if (startDate !== "" && endDate !== "") {
 
         const start =
@@ -511,7 +511,29 @@ function renderLeaveRequests(
             </td>
 
             <td>
-                ${leave.status}
+        <select
+        class="form-select form-select-sm"
+        onchange="updateStatus('${leave.employeeId}', this.value)">
+
+        <option
+            value="Pending"
+            ${leave.status === "Pending" ? "selected" : ""}>
+            Pending
+        </option>
+
+        <option
+            value="Approved"
+            ${leave.status === "Approved" ? "selected" : ""}>
+            Approved
+        </option>
+
+        <option
+            value="Rejected"
+            ${leave.status === "Rejected" ? "selected" : ""}>
+            Rejected
+        </option>
+
+    </select>
             </td>
 
             <td>
@@ -742,7 +764,7 @@ function deleteLeaveRequest(employeeId) {
             return;
         }
 
-       leaveRequests.splice(index, 1);
+        leaveRequests.splice(index, 1);
 
         saveToLocalStorage();
         renderLeaveRequests();
@@ -754,6 +776,23 @@ function deleteLeaveRequest(employeeId) {
     }
 
 }
+
+//status update function
+function updateStatus(employeeId, newStatus) {
+
+    const index = leaveRequests.findIndex(
+        (leave) => leave.employeeId === employeeId
+    );
+    if (index === -1) {
+        return;
+    }
+    leaveRequests[index].status = newStatus;
+    saveToLocalStorage();
+    applyFilters();
+    console.log("Status updated:", newStatus);
+}
+
+
 
 function clearErrors() {
 
