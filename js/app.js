@@ -6,6 +6,7 @@ let editIndex = -1;
 const searchInput = document.getElementById("searchInput");
 const statusFilter = document.getElementById("statusFilter");
 const leaveTypeFilter = document.getElementById("leaveTypeFilter");
+const sortFilter = document.getElementById("sortFilter");
 
 // Search Event
 
@@ -23,6 +24,12 @@ leaveTypeFilter.addEventListener("change", function () {
 
     applyFilters();
 
+});
+
+//sort event
+
+sortFilter.addEventListener("change", function () {
+    applyFilters();
 });
 
 // Search & Filter Functions
@@ -70,14 +77,40 @@ function applyFilters() {
 
     });
 
+    //sorting
 
-    renderLeaveRequests(filteredRequests);
+if (sortFilter.value === "name") {
+
+    filteredRequests.sort((a, b) =>
+        a.employeeName.localeCompare(b.employeeName)
+    );
+}
+
+else if (sortFilter.value === "startDate") {
+
+    filteredRequests.sort((a, b) =>
+        new Date(a.startDate) - new Date(b.startDate)
+    );
 
 }
 
-// ======================================================
+else if (sortFilter.value === "endDate") {
+
+    filteredRequests.sort((a, b) =>
+        new Date(a.endDate) - new Date(b.endDate)
+    );
+}
+
+else if (sortFilter.value === "createdDate") {
+
+    filteredRequests.sort((a, b) =>
+        new Date(a.createdDate) - new Date(b.createdDate)
+    );
+}
+    renderLeaveRequests(filteredRequests);
+}
+
 // FORM
-// ======================================================
 
 const leaveForm =
     document.getElementById("leaveForm");
